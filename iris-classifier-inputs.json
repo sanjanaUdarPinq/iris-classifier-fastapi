@@ -1,0 +1,32 @@
+[
+  {
+    "sepal_length": 5,
+    "sepal_width": 2,
+    "petal_length": 3,
+    "petal_width": 4
+  },
+  {
+    "sepal_length": 2,
+    "sepal_width": 6,
+    "petal_length": 1,
+    "petal_width": 3
+  },
+  {
+    "sepal_length": 8,
+    "sepal_width": 4,
+    "petal_length": 2,
+    "petal_width": 6
+  },
+  {
+    "sepal_length": 3,
+    "sepal_width": 5,
+    "petal_length": 2,
+    "petal_width": 5
+  },
+  {
+    "sepal_length": 6,
+    "sepal_width": 4,
+    "petal_length": 2,
+    "petal_width": 3
+  }
+]
