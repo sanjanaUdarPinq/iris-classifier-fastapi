@@ -1,0 +1,14 @@
+[
+  {
+    "features": {
+      "sepal_length": 0,
+      "sepal_width": 0,
+      "petal_length": 0,
+      "petal_width": 0
+    },
+    "output": {
+      "class": "<class>",
+      "probability": 0.0
+    }
+  }
+]
