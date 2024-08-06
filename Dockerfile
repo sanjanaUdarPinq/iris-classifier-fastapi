@@ -10,4 +10,4 @@ COPY . .
 # CMD ["uvicorn", "--host", "0.0.0.0", "--port", "5000", "iris.app:app"]
 
 # if running behind a TLS load balancer, add --proxy-headers
-CMD ["fastapi", "run", "iris/app.py", "--port", "80"] 
+CMD ["fastapi", "run", "iris/app.py", "--port", "5000"] 

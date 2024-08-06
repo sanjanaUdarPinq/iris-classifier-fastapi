@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter
 from starlette.responses import JSONResponse
 from fastapi import UploadFile
@@ -18,25 +19,47 @@ def upload(file: UploadFile):
 
 
 @router.post("/classify")
-def classify(inputs: UploadFile):
-
+def classify(inputs: List[Iris]):
     try:
-        # Parse inputs into JSON
-        iris_features = json.loads(inputs.file.read())
-
-        # Output
-        classified_iris = []
 
         # Init classifier
         iris_classifier = IrisClassifier()
 
+        # Output
+        classified_iris = []
+
         # Classify all input instances
-        for input in iris_features:
-            iris = Iris(**input)
-            result = iris_classifier.classify_iris(iris)
-            classified_iris.append({"features": input, "output": result})
+        for input in inputs:
+            features = input
+            result = iris_classifier.classify_iris(features)
+            classified_iris.append({"features": dict(input), "output": result})
 
         return JSONResponse(classified_iris)
 
     except Exception as e:
         return JSONResponse({"error": str(e)})
+
+
+# @router.post("/classify")
+# def classify(inputs: UploadFile):
+
+#     try:
+#         # Parse inputs into JSON
+#         iris_features = json.loads(inputs.file.read())
+
+#         # Output
+#         classified_iris = []
+
+#         # Init classifier
+#         iris_classifier = IrisClassifier()
+
+#         # Classify all input instances
+#         for input in iris_features:
+#             iris = Iris(**input)
+#             result = iris_classifier.classify_iris(iris)
+#             classified_iris.append({"features": input, "output": result})
+
+#         return JSONResponse(classified_iris)
+
+#     except Exception as e:
+#         return JSONResponse({"error": str(e)})
