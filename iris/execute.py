@@ -8,10 +8,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(message)s",
-)
+logging.basicConfig(level=logging.INFO, format="%(message)s", stream=sys.stdout)
 
 
 def load_data():
