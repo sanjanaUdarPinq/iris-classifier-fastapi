@@ -80,8 +80,8 @@ if __name__ == "__main__":
     evaluate_model(model, X_test, y_test, target_names)
 
     # Step 5: Classify new instances from input
-    # input_data = os.getenv("KIT_INPUTS_JSON")
-    with open("/mnt/input.json", "r") as f:
+    input_file = os.getenv("KIT_INPUTS_FILE")
+    with open(input_file, "r") as f:
         input_data = json.load(f)  # Reads JSON file content
 
     if not input_data:
