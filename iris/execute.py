@@ -42,7 +42,12 @@ def evaluate_model(model, X_test, y_test, target_names):
 def classify_instances(model, input_data, target_names):
     logging.info(f"Classifying instances from input data...\n")
     try:
-        data = json.loads(input_data)
+        if isinstance(input_data, str):
+            data = json.loads(input_data)  # Parse JSON string
+        elif isinstance(input_data, dict):
+            data = input_data  # Already a dictionary
+        else:
+            raise ValueError("Invalid input data format.")
     except Exception as e:
         logging.error(f"Failed to parse input data: {e}")
         sys.exit(1)
