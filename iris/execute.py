@@ -85,6 +85,10 @@ if __name__ == "__main__":
     evaluate_model(model, X_test, y_test, target_names)
 
     # Step 5: Classify new instances from input
+    env_var_from_coe = os.getenv("test_env")
+    logging.info(
+        f"Testing env_var_from_coe: " {env_var_from_coe}
+    )
     input_file = os.getenv("KIT_INPUTS_FILE")
     with open(input_file, "r") as f:
         input_data = json.load(f)  # Reads JSON file content
