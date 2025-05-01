@@ -87,7 +87,7 @@ if __name__ == "__main__":
     # Step 5: Classify new instances from input
     env_var_from_coe = os.getenv("test_env")
     logging.info(
-        f"Testing env_var_from_coe: " {env_var_from_coe}
+        f"Testing env_var_from_coe:  {env_var_from_coe}"
     )
     input_file = os.getenv("KIT_INPUTS_FILE")
     with open(input_file, "r") as f:
