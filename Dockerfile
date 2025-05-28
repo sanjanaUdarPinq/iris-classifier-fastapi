@@ -1,8 +1,15 @@
-FROM python:3.12
+FROM nvidia/cuda:12.2.0-cudnn8-runtime-ubuntu22.04
 
-# Copy requirements and install dependencies
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Copy the entire project
 COPY . /app
@@ -10,7 +17,7 @@ COPY . /app
 # Set the working directory
 WORKDIR /app
 
-# copy the srcipt to the working directory and set permissions
+# copy the script to the working directory and set permissions
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
