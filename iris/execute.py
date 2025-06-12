@@ -93,7 +93,7 @@ if __name__ == "__main__":
     
     if input_file:
         with open(input_file, "r") as f:
-        input_data = json.load(f)  # Reads JSON file content
+            input_data = json.load(f)  # Reads JSON file content
 
     if not input_data:
         logging.error(
