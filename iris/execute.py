@@ -90,12 +90,9 @@ if __name__ == "__main__":
         f"Testing env_var_from_coe:  {env_var_from_coe}"
     )
     input_file = os.getenv("KIT_INPUTS_FILE")
-    # Check if the input file exists
-    if not input_file:
-        logging.error("No input file provided. Provide a compatible input file.")
-        sys.exit(1)
     
-    with open(input_file, "r") as f:
+    if input_file:
+        with open(input_file, "r") as f:
         input_data = json.load(f)  # Reads JSON file content
 
     if not input_data:
