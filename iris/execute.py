@@ -90,6 +90,7 @@ if __name__ == "__main__":
         f"Testing env_var_from_coe:  {env_var_from_coe}"
     )
     input_file = os.getenv("KIT_INPUTS_FILE")
+    input_data = None  # Initialize to avoid NameError
     if input_file and os.path.isfile(input_file):
         with open(input_file, "r") as f:
             input_data = json.load(f)  # Reads JSON file content
