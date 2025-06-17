@@ -94,6 +94,9 @@ if __name__ == "__main__":
         f"Testing env_var_from_coe_2:  {env_var_from_coe_2}"
     )
     input_file = os.getenv("KIT_INPUTS_FILE")
+    logging.info(
+        f"Testing input_file:  {input_file}"
+    )
     input_data = None  # Initialize to avoid NameError
     if input_file and os.path.isfile(input_file):
         with open(input_file, "r") as f:
