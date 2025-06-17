@@ -91,6 +91,12 @@ if __name__ == "__main__":
         f"Testing env_var_from_coe:  {env_var_from_coe}"
     )
     logging.info(
+        f"Testing env_var_from_coe os.environ.get('test_env'):  {os.environ.get('test_env')}"
+    )
+    logging.info(
+        f"Testing env_var_from_coe os.environ['test_env']:  {os.environ['test_env']}"
+    )
+    logging.info(
         f"Testing env_var_from_coe_2:  {env_var_from_coe_2}"
     )
     input_file = os.getenv("KIT_INPUTS_FILE")
