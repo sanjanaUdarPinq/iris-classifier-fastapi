@@ -63,9 +63,30 @@ def classify_instances(model, input_data, target_names):
         logging.info(
             f"{i + 1} - Instance {instances[i]} -> Predicted class: {target_names[prediction]}"
         )
+    # Save to file
+    # save_output_to_file(predictions, instances, target_names, output_path="output.json")
 
+# def save_output_to_file(predictions, instances, target_names, output_path="output.json"):
+#     results = []
+#     for i, prediction in enumerate(predictions):
+#         results.append({
+#             "instance": instances[i],
+#             "predicted_class": target_names[prediction]
+#         })
+
+#     with open(output_path, "w") as f:
+#         json.dump({"results": results}, f, indent=2)
+    
+#     logging.info(f"\nPredictions saved to {output_path}\n")
+def save_output_to_file(predictions, instances, target_names, output_path="output.json"):
+    with open(output_path, "w") as f:
+        f.write("This is a test.\n")
+    logging.info(f"\nTest message written to {output_path}\n")
 
 if __name__ == "__main__":
+    # Test save_output_to_file function
+    save_output_to_file([], [], [])  # Just calls the function for test
+
     # Step 1: Load data
     X, y, target_names = load_data()
 
