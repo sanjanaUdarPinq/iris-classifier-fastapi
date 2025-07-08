@@ -10,19 +10,19 @@ from sklearn.metrics import classification_report, accuracy_score
 from pathlib import Path
 
 # Get the directory where the script is located and create output directory
-script_dir = Path(__file__).parent.absolute()
-output_dir = script_dir / "outputs"
-try:
-    os.makedirs(output_dir, exist_ok=True, mode=0o755)
-    # Debug logging
-    logging.info(f"Script directory: {script_dir}")
-    logging.info(f"Output directory: {output_dir}")
-    logging.info(f"Output directory exists: {output_dir.exists()}")
-    if output_dir.exists():
-        logging.info(f"Output directory permissions: {oct(output_dir.stat().st_mode)[-3:]}")
-except Exception as e:
-    logging.error(f"Failed to create output directory {output_dir}: {str(e)}")
-    raise
+# script_dir = Path(__file__).parent.absolute()
+# output_dir = script_dir / "outputs"
+# try:
+#     os.makedirs(output_dir, exist_ok=True, mode=0o755)
+#     # Debug logging
+#     logging.info(f"Script directory: {script_dir}")
+#     logging.info(f"Output directory: {output_dir}")
+#     logging.info(f"Output directory exists: {output_dir.exists()}")
+#     if output_dir.exists():
+#         logging.info(f"Output directory permissions: {oct(output_dir.stat().st_mode)[-3:]}")
+# except Exception as e:
+#     logging.error(f"Failed to create output directory {output_dir}: {str(e)}")
+#     raise
 
 # Configure logging to write to file
 logging.basicConfig(
