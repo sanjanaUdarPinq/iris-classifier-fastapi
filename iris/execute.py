@@ -86,27 +86,27 @@ def classify_instances(model, input_data, target_names):
             f"{i + 1} - Instance {instances[i]} -> Predicted class: {target_names[prediction]}"
         )
     # Save to file
-    save_output_to_file(predictions, instances, target_names)
+    # save_output_to_file(predictions, instances, target_names)
 
-def save_output_to_file(predictions, instances, target_names):
-    results = []
-    for i, prediction in enumerate(predictions):
-        results.append({
-            "instance": instances[i],
-            "predicted_class": target_names[prediction]
-        })
+# def save_output_to_file(predictions, instances, target_names):
+#     results = []
+#     for i, prediction in enumerate(predictions):
+#         results.append({
+#             "instance": instances[i],
+#             "predicted_class": target_names[prediction]
+#         })
     
-    # Save results to outputs directory
-    output_file = output_dir / "results.json"
-    try:
-        with open(output_file, "w") as f:
-            json.dump({"status": "success", "results": results}, f, indent=2)
-        # Set file permissions explicitly
-        os.chmod(output_file, 0o644)
-        logging.info(f"Predictions saved to {output_file}")
-    except Exception as e:
-        logging.error(f"Failed to save predictions to {output_file}: {str(e)}")
-        raise
+#     # Save results to outputs directory
+#     output_file = output_dir / "results.json"
+#     try:
+#         with open(output_file, "w") as f:
+#             json.dump({"status": "success", "results": results}, f, indent=2)
+#         # Set file permissions explicitly
+#         os.chmod(output_file, 0o644)
+#         logging.info(f"Predictions saved to {output_file}")
+#     except Exception as e:
+#         logging.error(f"Failed to save predictions to {output_file}: {str(e)}")
+#         raise
 
 if __name__ == "__main__":
     # Test save_output_to_file function
