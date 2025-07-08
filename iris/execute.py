@@ -146,14 +146,24 @@ if __name__ == "__main__":
     logging.info(
         f"Testing env_var_from_coe_2:  {env_var_from_coe_2}"
     )
-    # Check if input directory exists
-    input_dir = "/mnt/input-files"
+    # Get input directory from environment variable
+    input_dir = os.getenv("KIT_INPUTS_DIR")
     input_data = None
+    
+    if not input_dir:
+        logging.error("KIT_INPUTS_DIR environment variable is not set")
+        sys.exit(1)
+        
+    logging.info(f"Using input directory from KIT_INPUTS_DIR: {input_dir}")
     
     if os.path.exists(input_dir) and os.path.isdir(input_dir):
         # List all files in the input directory for debugging
-        files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
-        logging.info(f"Found {len(files)} files in {input_dir}: {', '.join(files) if files else 'No files found'}")
+        try:
+            files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
+            logging.info(f"Found {len(files)} files in {input_dir}: {', '.join(files) if files else 'No files found'}")
+        except Exception as e:
+            logging.error(f"Error reading input directory {input_dir}: {str(e)}")
+            sys.exit(1)
         
         # Look for JSON files in the directory
         json_files = [f for f in files if f.lower().endswith('.json')]
