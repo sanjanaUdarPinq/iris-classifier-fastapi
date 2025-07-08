@@ -7,16 +7,28 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score
 
-# Write outputs here
-output_dir = "outputs"
-os.makedirs(output_dir, exist_ok=True)
+from pathlib import Path
+
+# Get the directory where the script is located and create output directory
+script_dir = Path(__file__).parent.absolute()
+output_dir = script_dir / "outputs"
+try:
+    os.makedirs(output_dir, exist_ok=True, mode=0o755)
+    # Debug logging
+    logging.info(f"Script directory: {script_dir}")
+    logging.info(f"Output directory: {output_dir}")
+    logging.info(f"Output directory exists: {output_dir.exists()}")
+    if output_dir.exists():
+        logging.info(f"Output directory permissions: {oct(output_dir.stat().st_mode)[-3:]}")
+except Exception as e:
+    logging.error(f"Failed to create output directory {output_dir}: {str(e)}")
+    raise
 
 # Configure logging to write to file
 logging.basicConfig(
     level=logging.INFO, 
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(f"{log_dir}/iris_classifier.log"),
         logging.StreamHandler(sys.stdout)
     ]
 )
@@ -85,10 +97,16 @@ def save_output_to_file(predictions, instances, target_names):
         })
     
     # Save results to outputs directory
-    with open(f"{output_dir}/results.json", "w") as f:
-        json.dump({"status": "success", "results": results}, f, indent=2)
-    
-    logging.info(f"Predictions saved to {output_dir}/results.json")
+    output_file = output_dir / "results.json"
+    try:
+        with open(output_file, "w") as f:
+            json.dump({"status": "success", "results": results}, f, indent=2)
+        # Set file permissions explicitly
+        os.chmod(output_file, 0o644)
+        logging.info(f"Predictions saved to {output_file}")
+    except Exception as e:
+        logging.error(f"Failed to save predictions to {output_file}: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     # Test save_output_to_file function
