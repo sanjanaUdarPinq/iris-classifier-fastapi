@@ -7,9 +7,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format="%(message)s", stream=sys.stdout)
+# Write outputs here
+output_dir = "outputs"
+os.makedirs(output_dir, exist_ok=True)
 
+# Configure logging to write to file
+logging.basicConfig(
+    level=logging.INFO, 
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(f"{log_dir}/iris_classifier.log"),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 
 def load_data():
     logging.info("Loading Iris dataset...\n")
@@ -64,28 +74,26 @@ def classify_instances(model, input_data, target_names):
             f"{i + 1} - Instance {instances[i]} -> Predicted class: {target_names[prediction]}"
         )
     # Save to file
-    # save_output_to_file(predictions, instances, target_names, output_path="output.json")
+    save_output_to_file(predictions, instances, target_names)
 
-# def save_output_to_file(predictions, instances, target_names, output_path="output.json"):
-#     results = []
-#     for i, prediction in enumerate(predictions):
-#         results.append({
-#             "instance": instances[i],
-#             "predicted_class": target_names[prediction]
-#         })
-
-#     with open(output_path, "w") as f:
-#         json.dump({"results": results}, f, indent=2)
+def save_output_to_file(predictions, instances, target_names):
+    results = []
+    for i, prediction in enumerate(predictions):
+        results.append({
+            "instance": instances[i],
+            "predicted_class": target_names[prediction]
+        })
     
-#     logging.info(f"\nPredictions saved to {output_path}\n")
-def save_output_to_file(predictions, instances, target_names, output_path="output.json"):
-    with open(output_path, "w") as f:
-        f.write("This is a test.\n")
-    logging.info(f"\nTest message written to {output_path}\n")
+    # Save results to outputs directory
+    with open(f"{output_dir}/results.json", "w") as f:
+        json.dump({"status": "success", "results": results}, f, indent=2)
+    
+    logging.info(f"Predictions saved to {output_dir}/results.json")
 
 if __name__ == "__main__":
     # Test save_output_to_file function
-    save_output_to_file([], [], [])  # Just calls the function for test
+    # save_output_to_file([], [], [])  # Just calls the function for test
+    logging.info("Starting Iris Classifier execution...")
 
     # Step 1: Load data
     X, y, target_names = load_data()
