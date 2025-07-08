@@ -120,16 +120,31 @@ if __name__ == "__main__":
     logging.info(
         f"Testing env_var_from_coe_2:  {env_var_from_coe_2}"
     )
-    input_file = os.getenv("KIT_INPUTS_FILE")
-    logging.info(
-        f"Testing input_file:  {input_file}"
-    )
-    input_data = None  # Initialize to avoid NameError
-    if input_file and os.path.isfile(input_file):
-        with open(input_file, "r") as f:
-            input_data = json.load(f)  # Reads JSON file content
+    # Check if input directory exists
+    input_dir = "/mnt/input-files"
+    input_data = None
+    
+    if os.path.exists(input_dir) and os.path.isdir(input_dir):
+        # List all files in the input directory for debugging
+        files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
+        logging.info(f"Found {len(files)} files in {input_dir}: {', '.join(files) if files else 'No files found'}")
+        
+        # Look for JSON files in the directory
+        json_files = [f for f in files if f.lower().endswith('.json')]
+        
+        if json_files:
+            # Use the first JSON file found
+            input_file = os.path.join(input_dir, json_files[0])
+            logging.info(f"Reading input from file: {input_file}")
+            try:
+                with open(input_file, "r") as f:
+                    input_data = json.load(f)
+            except Exception as e:
+                logging.error(f"Error reading input file {input_file}: {str(e)}")
+        else:
+            logging.warning(f"No JSON files found in {input_dir}")
     else:
-        print("No valid input file found, skipping file processing.")
+        logging.error(f"Input directory {input_dir} does not exist or is not a directory")
 
 
     if not input_data:
