@@ -147,14 +147,14 @@ if __name__ == "__main__":
         f"Testing env_var_from_coe_2:  {env_var_from_coe_2}"
     )
     # Get input directory from environment variable
-    input_dir = os.getenv("KIT_INPUTS_DIR")
+    input_dir = os.getenv("KIT_INPUTS_FILE")
     input_data = None
     
     if not input_dir:
-        logging.error("KIT_INPUTS_DIR environment variable is not set")
+        logging.error("KIT_INPUTS_FILE environment variable is not set")
         sys.exit(1)
         
-    logging.info(f"Using input directory from KIT_INPUTS_DIR: {input_dir}")
+    logging.info(f"Using input directory from KIT_INPUTS_FILE: {input_dir}")
     
     if os.path.exists(input_dir) and os.path.isdir(input_dir):
         # List all files in the input directory for debugging
