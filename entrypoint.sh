@@ -7,9 +7,12 @@ else
   echo "env.sh missing or empty"
 fi
 
+# Create output directories in writable /tmp location
+mkdir -p /tmp/outputs /tmp/logs
+chmod 755 /tmp/outputs /tmp/logs
+
 if [ -f "$KIT_INPUTS_FILE" ]; then
   echo "Found input file, processing…"
-  # do work
 else
   echo "No input file supplied, continuing without it"
 fi
