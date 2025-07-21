@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ -s /env-mount/env.sh ]; then
+if [ -s mnt/env/env.sh ]; then
   echo "Sourcing env.sh"
-  . /env-mount/env.sh
+  . mnt/env/env.sh
 else
   echo "env.sh missing or empty"
 fi
