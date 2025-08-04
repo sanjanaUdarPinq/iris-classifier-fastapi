@@ -11,7 +11,7 @@ fi
 mkdir -p /tmp/outputs /tmp/logs
 chmod 755 /tmp/outputs /tmp/logs
 
-if [ -f "$KIT_INPUTS_FILE" ]; then
+if [ -d "$KIT_INPUTS_FILE" ]; then
   echo "Found input file, processing…"
 else
   echo "No input file supplied, continuing without it"
