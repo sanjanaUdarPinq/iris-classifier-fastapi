@@ -9,17 +9,17 @@ from sklearn.metrics import classification_report, accuracy_score
 from pathlib import Path
 
 # Use output directories created in entrypoint.sh
-# output_dir = Path("/tmp/outputs")
-# logs_dir = Path("/tmp/logs")
+output_dir = Path("/tmp/outputs")
+logs_dir = Path("/tmp/logs")
 
 # Configure logging to write to file
-# log_file = logs_dir / "iris_classifier.log"
+log_file = logs_dir / "iris_classifier.log"
 logging.basicConfig(
     level=logging.INFO, 
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        # logging.FileHandler(log_file)
+        logging.FileHandler(log_file)
     ]
 )
 
@@ -81,27 +81,27 @@ Classifying {len(instances)} instances...\
             f"{i + 1} - Instance {instances[i]} -> Predicted class: {predicted_class}"
     )
     # Save to file
-    # save_output_to_file(predictions, instances, target_names)
+    save_output_to_file(predictions, instances, target_names)
 
-# def save_output_to_file(predictions, instances, target_names):
-#     results = []
-#     for i, prediction in enumerate(predictions):
-#         results.append({
-#             "instance": instances[i],
-#             "predicted_class": target_names[prediction]
-#         })
+def save_output_to_file(predictions, instances, target_names):
+    results = []
+    for i, prediction in enumerate(predictions):
+        results.append({
+            "instance": instances[i],
+            "predicted_class": target_names[prediction]
+        })
     
-#     # Save results to outputs directory
-#     with open(f"{output_dir}/results.json", "w") as f:
-#         json.dump({"status": "success", "results": results}, f, indent=2)
+    # Save results to outputs directory
+    with open(f"{output_dir}/results.json", "w") as f:
+        json.dump({"status": "success", "results": results}, f, indent=2)
     
-#     logging.info(f"Predictions saved to {output_dir}/results.json")
+    logging.info(f"Predictions saved to {output_dir}/results.json")
 
 
 if __name__ == "__main__":
     logging.info("Starting Iris Classifier execution...")
-    # logging.info(f"Using output directory: {output_dir}")
-    # logging.info(f"Using logs directory: {logs_dir}")
+    logging.info(f"Using output directory: {output_dir}")
+    logging.info(f"Using logs directory: {logs_dir}")
 
     # Step 1: Load data
     X, y, target_names = load_data()
